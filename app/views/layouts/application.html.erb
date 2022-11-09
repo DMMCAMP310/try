@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RamenReview</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="navbar-brand">
+          <p class="navbar-item">
+            <%= link_to root_path do %>
+              <strong class="is-size-3" style="font-family: cursive; color: black;">ramen review</strong>
+            <% end %>
+          </p>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <div>
+            <%= link_to root_path, class: 'nav-link text-light' do %>
+              ラーメン店一覧
+            <% end %>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li class="text-light">ようこそ <%= current_user.name %> さん</li>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
+                      ログアウト
+                  <% end %>
+                </li>  
+              <% else %>
+                <li>
+                  <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+                    ログイン
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+                    新規登録
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <%= yield %>
+  </body>
+</html>
